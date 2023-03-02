@@ -4,7 +4,7 @@ import User from '../../database/models/User';
 import IServiceUser from '../interfaces/IServiceUser';
 import { IToken, ILogin, IUser } from '../interfaces/IUser';
 import ErrorWithStatus from '../utils/ErrorWithStatus';
-import generateToken from '../utils/JWT';
+import { generateToken } from '../utils/JWT';
 
 export default class UserService implements IServiceUser {
   protected model: ModelStatic<User> = User;
@@ -31,7 +31,11 @@ export default class UserService implements IServiceUser {
     UserService.checkFields(userObject);
     const user = await this.findOne(userObject);
     const isAuth = compareSync(userObject.password, user.password);
-    if (isAuth) return Promise.resolve({ token: generateToken(userObject) });
+    if (isAuth) {
+      return Promise.resolve({
+        token: generateToken({ ...userObject, role: user.role }),
+      });
+    }
     throw new ErrorWithStatus(this._invalidMessage, 401);
   }
 }
