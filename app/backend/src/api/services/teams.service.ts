@@ -9,4 +9,8 @@ export default class TeamService implements IServiceTeam {
   findAll(): Promise<ITeam[]> {
     return this.model.findAll();
   }
+
+  findByPk(pk: string): Promise<ITeam | null> {
+    return this.model.findByPk(pk);
+  }
 }
