@@ -17,14 +17,4 @@ export default class MatchController {
       return res.status(500).json({ message: 'Unknown error' });
     }
   }
-
-  async findFilteredMatches(req: Request, res: Response) {
-    try {
-      const { inProgress } = req.query;
-      const result = await this._service.getFilteredMatches(inProgress as string);
-      return res.status(200).json(result);
-    } catch (error) {
-      return res.status(500).json({ message: 'Unknown error' });
-    }
-  }
 }

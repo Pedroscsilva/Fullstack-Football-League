@@ -7,9 +7,5 @@ const matchService = new MatchService();
 const matchController = new MatchController(matchService);
 
 matchRoutes.get('/matches?', (req: Request, res: Response) => matchController.findAll(req, res));
-// matchRoutes.get(
-//   '/matches?',
-//   (req: Request, res: Response) => matchController.findFilteredMatches(req, res),
-// );
 
 export default matchRoutes;
