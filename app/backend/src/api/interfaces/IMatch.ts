@@ -2,7 +2,7 @@ interface ITeamForMatch {
   teamName: string;
 }
 
-export default interface IMatch {
+export interface IMatch {
   id: number;
   homeTeamId: number;
   awayTeamId: number;
@@ -10,4 +10,9 @@ export default interface IMatch {
   inProgress: boolean;
   homeTeam?: ITeamForMatch;
   awayTeam?: ITeamForMatch;
+}
+
+export interface IUpdateMatchResults {
+  homeTeamGoals: number;
+  awayTeamGoals: number;
 }
