@@ -16,6 +16,7 @@ class App {
     this.app.use(routes.teamRoutes);
     this.app.use(routes.userRoutes);
     this.app.use(routes.matchRoutes);
+    this.app.use(routes.leaderboardRoutes);
   }
 
   private config():void {

@@ -1,4 +1,4 @@
-import { IMatch, IUpdateMatchResults, IRecieveObject } from './IMatch';
+import { IMatch, IUpdateMatchResults, IRecieveObject, IInsertedMatch } from './IMatch';
 
 export default interface IServiceMatch {
   getUnfilteredMatches(): Promise<IMatch[]>;
@@ -6,5 +6,5 @@ export default interface IServiceMatch {
   getFilteredMatches(progress: string): Promise<IMatch[]>;
   finishMatch(id: string): void;
   updateMatchResult(id: string, newResults: IUpdateMatchResults): void;
-  insertNewMatch(newMatchBody: IRecieveObject): Promise<IMatch>;
+  insertNewMatch(newMatchBody: IRecieveObject): Promise<IInsertedMatch>;
 }

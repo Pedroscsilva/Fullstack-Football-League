@@ -7,9 +7,9 @@ interface ITeamForMatch {
 export interface IMatch {
   id: number;
   homeTeamId: number;
-  homeTeamGoals?: number;
+  homeTeamGoals: number;
   awayTeamId: number;
-  awayTeamGoals?: number;
+  awayTeamGoals: number;
   inProgress: boolean;
   homeTeam?: ITeamForMatch;
   awayTeam?: ITeamForMatch;
@@ -25,6 +25,13 @@ export interface ICreateMatchBody {
   awayTeamId: number,
   homeTeamGoals: number,
   awayTeamGoals: number,
+}
+
+export interface IInsertedMatch {
+  id: number;
+  homeTeamId: number;
+  awayTeamId: number;
+  inProgress: boolean;
 }
 
 export type IRecieveObject = Optional<ICreateMatchBody, 'awayTeamGoals' | 'homeTeamGoals'>;
