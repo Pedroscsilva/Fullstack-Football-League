@@ -15,6 +15,7 @@ class App {
     // rotas
     this.app.use(routes.teamRoutes);
     this.app.use(routes.userRoutes);
+    this.app.use(routes.matchRoutes);
   }
 
   private config():void {
