@@ -1,6 +1,7 @@
 import { Router, Request, Response } from 'express';
 import MatchController from '../controllers/MatchController';
 import authenticationMiddleware from '../middlewares/AuthMiddleware';
+import newMatchCheck from '../middlewares/MatchMiddleware';
 import MatchService from '../services/matches.service';
 
 const matchRoutes = Router();
@@ -21,6 +22,7 @@ matchRoutes.patch(
 matchRoutes.post(
   '/matches',
   authenticationMiddleware,
+  newMatchCheck,
   (req: Request, res: Response) => matchController.createNewMatch(req, res),
 );
 
