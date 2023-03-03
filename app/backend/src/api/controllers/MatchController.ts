@@ -42,4 +42,13 @@ export default class MatchController {
       return res.status(500).json({ message: this.defaultErrorMessage });
     }
   }
+
+  async createNewMatch(req: Request, res: Response) {
+    try {
+      const newMatch = await this._service.insertNewMatch(req.body);
+      return res.status(201).json(newMatch);
+    } catch (error) {
+      return res.status(500).json({ message: this.defaultErrorMessage });
+    }
+  }
 }

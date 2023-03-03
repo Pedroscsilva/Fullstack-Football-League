@@ -1,7 +1,7 @@
 import { ModelStatic } from 'sequelize';
 import Team from '../../database/models/Team';
 import Match from '../../database/models/Match';
-import { IMatch, IUpdateMatchResults } from '../interfaces/IMatch';
+import { IMatch, IRecieveObject, IUpdateMatchResults } from '../interfaces/IMatch';
 import IServiceMatch from '../interfaces/IServiceMatch';
 import ErrorWithStatus from '../utils/ErrorWithStatus';
 
@@ -43,5 +43,14 @@ export default class MatchService implements IServiceMatch {
     this.model.update({ homeTeamGoals, awayTeamGoals }, {
       where: { id },
     });
+  }
+
+  async insertNewMatch(newMatchBody: IRecieveObject): Promise<IMatch> {
+    const newMatch = await this.model.create({ ...newMatchBody, inProgress: true });
+    return {
+      id: newMatch.id,
+      inProgress: true,
+      ...newMatchBody,
+    };
   }
 }
