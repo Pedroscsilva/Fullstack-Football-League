@@ -1,5 +1,6 @@
-import IMatch from "./IMatch";
+import IMatch from './IMatch';
 
 export default interface IServiceMatch {
-  getAllMatches(): Promise<any>;
+  getAllMatches(progress: string | undefined): Promise<IMatch[]>;
+  getFilteredMatches(progress: string): Promise<IMatch[]>;
 }

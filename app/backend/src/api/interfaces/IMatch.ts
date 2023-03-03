@@ -1,6 +1,6 @@
 interface ITeamForMatch {
   teamName: string;
-};
+}
 
 export default interface IMatch {
   id: number;

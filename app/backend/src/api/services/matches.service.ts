@@ -7,12 +7,27 @@ import IServiceMatch from '../interfaces/IServiceMatch';
 export default class MatchService implements IServiceMatch {
   protected model: ModelStatic<Match> = Match;
 
-  getAllMatches(): Promise<IMatch[]> {
+  getUnfilteredMatches(): Promise<IMatch[]> {
     return this.model.findAll({
       include: [
         { model: Team, as: 'homeTeam', attributes: { exclude: ['id'] } },
         { model: Team, as: 'awayTeam', attributes: { exclude: ['id'] } },
-      ]
+      ],
     });
+  }
+
+  getFilteredMatches(progress: string): Promise<IMatch[]> {
+    return this.model.findAll({
+      include: [
+        { model: Team, as: 'homeTeam', attributes: { exclude: ['id'] } },
+        { model: Team, as: 'awayTeam', attributes: { exclude: ['id'] } },
+      ],
+      where: { inProgress: JSON.parse(progress) },
+    });
+  }
+
+  getAllMatches(progress: string | undefined): Promise<IMatch[]> {
+    if (!progress) return this.getUnfilteredMatches();
+    return this.getFilteredMatches(progress);
   }
 }
