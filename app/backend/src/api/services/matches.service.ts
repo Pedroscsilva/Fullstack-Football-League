@@ -30,4 +30,10 @@ export default class MatchService implements IServiceMatch {
     if (!progress) return this.getUnfilteredMatches();
     return this.getFilteredMatches(progress);
   }
+
+  finishMatch(id: string): void {
+    this.model.update({ inProgress: false }, {
+      where: { id },
+    });
+  }
 }

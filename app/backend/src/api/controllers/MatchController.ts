@@ -17,4 +17,14 @@ export default class MatchController {
       return res.status(500).json({ message: 'Unknown error' });
     }
   }
+
+  async finishMatch(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      this._service.finishMatch(id);
+      return res.status(200).json({ message: 'Finished' });
+    } catch (error) {
+      return res.status(500).json({ message: 'Unknown error' });
+    }
+  }
 }
