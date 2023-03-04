@@ -1,5 +1,5 @@
 import ILeaderboard from './ILeaderboard';
 
 export default interface IServiceLeaderboard {
-  getLeaderboard(): Promise<ILeaderboard[]>;
+  getLeaderboard(type: undefined | 'home' | 'away'): Promise<ILeaderboard[]>;
 }

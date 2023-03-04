@@ -93,11 +93,38 @@ export default class LeaderboardService implements IServiceLeaderboard {
     return changedLeadearboard;
   }
 
-  async getLeaderboard(): Promise<ILeaderboard[]> {
+  static evaluateHomeOrAwayMatches(
+    currentLeaderboard: ILeaderboard[],
+    playedMatches: IMatch[],
+    type: 'home' | 'away',
+  ) {
+    const changedLeadearboard = currentLeaderboard;
+    const otherType = type === 'home' ? 'away' : 'home';
+    playedMatches.forEach((match) => {
+      const arrayIndex = match[`${type}TeamId`] - 1;
+
+      const initialStats = changedLeadearboard[arrayIndex];
+
+      const newStats = LeaderboardService
+        .calculateMatchStats(initialStats, match, type, otherType);
+
+      changedLeadearboard[arrayIndex] = newStats;
+    });
+
+    return changedLeadearboard;
+  }
+
+  async getLeaderboard(type: undefined | 'home' | 'away'): Promise<ILeaderboard[]> {
+    let evaluateMatches;
     const teams = await this.getTeams();
     const leaderboardArchiteture = LeaderboardService.createLeaderboardArchiteture(teams);
     const matches = await this.getPlayedMatches();
-    const evaluateMatches = LeaderboardService.evaluateMatches(leaderboardArchiteture, matches);
+    if (!type) {
+      evaluateMatches = LeaderboardService.evaluateMatches(leaderboardArchiteture, matches);
+    } else {
+      evaluateMatches = LeaderboardService
+        .evaluateHomeOrAwayMatches(leaderboardArchiteture, matches, type);
+    }
     const sortedArray = evaluateMatches.sort(
       firstBy((a: ILeaderboard, b: ILeaderboard) => b.totalPoints - a.totalPoints)
         .thenBy((a: ILeaderboard, b: ILeaderboard) => b.totalVictories - a.totalVictories)
