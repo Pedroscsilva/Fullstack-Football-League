@@ -18,16 +18,11 @@ export default class UserController {
       if (error instanceof ErrorWithStatus) {
         return res.status(error.statusCode).json({ message: error.message });
       }
-      console.log(error);
     }
   }
 
   static async getUserRole(req: Request, res: Response) {
-    try {
-      const userRole = decodeToken(req.headers.authorization);
-      return res.status(200).json({ role: userRole.role });
-    } catch (error) {
-      return res.status(500).json({ message: 'unknown error' });
-    }
+    const userRole = await decodeToken(req.headers.authorization);
+    return res.status(200).json({ role: userRole.role });
   }
 }

@@ -32,9 +32,8 @@ export default class UserService implements IServiceUser {
     const user = await this.findOne(userObject);
     const isAuth = compareSync(userObject.password, user.password);
     if (isAuth) {
-      return Promise.resolve({
-        token: generateToken({ ...userObject, role: user.role }),
-      });
+      const token = await generateToken({ ...userObject, role: user.role });
+      return { token };
     }
     throw new ErrorWithStatus(this._invalidMessage, 401);
   }

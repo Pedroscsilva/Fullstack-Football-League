@@ -49,4 +49,6 @@ const teams = [
   },
 ]
 
-export default teams;
+export const fullTeams = teams.map((team, i) => {
+  return { teamName: team.team_name, id: i += 1 };
+});
