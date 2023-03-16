@@ -1,3 +1,5 @@
+# Fullstack Football League
+
 This is a fullstack project in which I created an API to serve a frontend application.
 
 In this project I had the chance to develop E2E tests, an authentication method with JWT and a way to interact with the SQL database with sequelize.
