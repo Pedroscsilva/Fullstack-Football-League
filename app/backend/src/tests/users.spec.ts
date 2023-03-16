@@ -8,11 +8,6 @@ import chaiHttp = require('chai-http');
 import { app } from '../app';
 import User from '../database/models/User';
 
-import { IUser } from '../api/interfaces/IUser';
-
-import UserService from '../api/services/user.service';
-import  * as JWTUtils from '../api/utils/JWT';
-
 import { Response } from 'superagent';
 import { usersObjects, tokenMock, invalidEmailOrPasswordMessage } from './mocks/users';
 
