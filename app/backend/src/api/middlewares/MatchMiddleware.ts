@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import TeamService from '../services/teams.service';
+import TeamService from '../services/TeamService';
 import ErrorWithStatus from '../utils/ErrorWithStatus';
 
 const teamService = new TeamService();

@@ -2,7 +2,7 @@ import { Router, Request, Response } from 'express';
 import MatchController from '../controllers/MatchController';
 import authenticationMiddleware from '../middlewares/AuthMiddleware';
 import newMatchCheck from '../middlewares/MatchMiddleware';
-import MatchService from '../services/matches.service';
+import MatchService from '../services/MatchService';
 
 const matchRoutes = Router();
 const matchService = new MatchService();
